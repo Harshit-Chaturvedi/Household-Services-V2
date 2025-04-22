@@ -3,7 +3,6 @@
 
 ## ✅ Household Services Application - V2 — `README.md`
 
-```markdown
 # 🛠 Household Services Application - V2
 
 An advanced version of the Household Services platform with **RBAC (Role-Based Access Control)**, **VueJS frontend**, **Redis caching**, and **background jobs** using Celery.
