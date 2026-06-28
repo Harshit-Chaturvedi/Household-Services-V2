@@ -21,10 +21,10 @@ import csv
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///A-Z-services.sqlite3"
-app.config['JWT_SECRET_KEY'] = 'Harshit'  
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///A-Z-services.sqlite3')
+app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'Harshit')  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['REDIS_URL'] = "redis://localhost:6379/0"
+app.config['REDIS_URL'] = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
 app.config['broker_url'] = app.config['REDIS_URL']
 app.config['result_backend'] = app.config['REDIS_URL']
 
@@ -37,9 +37,11 @@ app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_DEFAULT_SENDER'] = 'admin@gmail.com'
 
 # CORS(app, resources={r"/*": {"origins": "http://localhost:8080"}})
+frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:8080')
+CORS(app,origins=frontend_url,supports_credentials=True)
 CORS(app,origins='http://localhost:8081',supports_credentials=True)
-CORS(app,origins='http://localhost:8080',supports_credentials=True)
 CORS(app, supports_credentials=True)
+
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'pdf'}

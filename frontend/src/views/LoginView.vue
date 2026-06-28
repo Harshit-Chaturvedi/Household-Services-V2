@@ -31,7 +31,8 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        const res = await axios.post('http://localhost:5000/login', {
+        const apiUrl = process.env.VUE_APP_API_URL || 'http://localhost:5000';
+        const res = await axios.post(`${apiUrl}/login`, {
           email: this.email,
           password: this.password
         });
